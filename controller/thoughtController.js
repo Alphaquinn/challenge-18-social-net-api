@@ -1,8 +1,8 @@
 const { Thought, User } = require('../models');
 
-const thoughtsContoller={
-    getthoughts(req,res){
-        Thought.find()
+const thoughtsController={
+getthoughts(req,res){
+    thought.find()
         .sort({createAt: -1})
         .then((dbThoughtsData)=> {
             res.json(dbThoughtsData);
@@ -18,9 +18,15 @@ const thoughtsContoller={
     createNewThought(req,res){
         Thought.create(req.body)
         .then((dbThoughtsData)=>{
+            
             return User.findOneandUpdate(
+                
+                
                 {_id:req.body.userId},
+               
                 {$push:{thoughts:dbThoughtsData._id}},
+                
+                
                 {new:true},
             );
         })
